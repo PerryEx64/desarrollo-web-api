@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import CrearDistritos from './src/CrearDistritos'
+import VerDistritos from './src/VerDistritos'
+import { CreateContext } from './context'
 
 export default function App() {
+  const [updated, setUpdated] = React.useState(false)
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <CreateContext.Provider value={{ updated, setUpdated }}>
+      <View style={styles.container}>
+        <View style={{ height: '50%' }}>
+          <CrearDistritos update={updated} setUpdate={setUpdated} />
+        </View>
+        
+        <View style={{ height: '50%' }}>
+          <VerDistritos />
+        </View>
+      </View>
+    </CreateContext.Provider>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 60,
+    backgroundColor: '#fff'
   },
-});
+  card: {}
+})
